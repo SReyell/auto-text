@@ -12,20 +12,25 @@ export default function Home() {
       // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Create a script to open the SMS link
-      const script = document.createElement('script');
-      script.innerHTML = `
-        (function() {
-          const link = document.createElement('a');
-          link.href = "${smsLink}";
-          link.style.display = 'none';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        })();
-      `;
-      document.body.appendChild(script);
-      document.body.removeChild(script);
+      // Create a hidden iframe
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+
+      // Write an HTML document into the iframe
+      iframe.contentWindow.document.open();
+      iframe.contentWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <body>
+          <a id="smsLink" href="${smsLink}">Send SMS</a>
+          <script>
+            document.getElementById('smsLink').click();
+          </script>
+        </body>
+        </html>
+      `);
+      iframe.contentWindow.document.close();
     }
   }, [code]);
 

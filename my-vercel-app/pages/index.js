@@ -1,17 +1,22 @@
 // pages/index.js
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Home() {
   const router = useRouter();
   const { code } = router.query;
+  const [smsLink, setSmsLink] = useState('');
 
   useEffect(() => {
     if (code) {
       // Construct the SMS link
-      const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
+      setSmsLink(`sms:888222?body=${encodeURIComponent(code)}`);
+    }
+  }, [code]);
 
+  const handleClick = () => {
+    if (smsLink) {
       // Create a temporary link element
       const link = document.createElement('a');
       link.href = smsLink;
@@ -25,13 +30,13 @@ export default function Home() {
       // Remove the link from the document
       document.body.removeChild(link);
     }
-  }, [code]);
+  };
 
   return (
     <div>
-      <h1>Send Code via SMS v1</h1>
+      <h1>Send Code via SMS v2</h1>
       {code ? (
-        <p>Redirecting to SMS app...</p>
+        <button onClick={handleClick}>Send SMS</button>
       ) : (
         <p>No code provided. Please use the URL with a ?code= parameter.</p>
       )}

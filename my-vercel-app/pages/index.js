@@ -9,19 +9,23 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
+      // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
-      
-      // Create a temporary link element and trigger click event
-      const tempLink = document.createElement('a');
-      tempLink.href = smsLink;
-      tempLink.style.display = 'none';
-      document.body.appendChild(tempLink);
 
-      // Programmatically click the link to open SMS app
-      tempLink.click();
-
-      // Remove the link from the DOM
-      document.body.removeChild(tempLink);
+      // Create a script to open the SMS link
+      const script = document.createElement('script');
+      script.innerHTML = `
+        (function() {
+          const link = document.createElement('a');
+          link.href = "${smsLink}";
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        })();
+      `;
+      document.body.appendChild(script);
+      document.body.removeChild(script);
     }
   }, [code]);
 

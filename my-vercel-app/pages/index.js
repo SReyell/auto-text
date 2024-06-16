@@ -12,26 +12,32 @@ export default function Home() {
       // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Create a hidden form element
-      const form = document.createElement('form');
-      form.action = smsLink;
-      form.method = 'get';
-      form.style.display = 'none';
+      // Create an iframe to hold the link
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
 
-      // Append the form to the body
-      document.body.appendChild(form);
-
-      // Programmatically submit the form
-      form.submit();
-
-      // Remove the form from the document
-      document.body.removeChild(form);
+      const iframeDoc = iframe.contentWindow.document;
+      iframeDoc.open();
+      iframeDoc.write(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head></head>
+        <body>
+          <a id="smsLink" href="${smsLink}">Send SMS</a>
+          <script>
+            document.getElementById('smsLink').click();
+          </script>
+        </body>
+        </html>
+      `);
+      iframeDoc.close();
     }
   }, [code]);
 
   return (
     <div>
-      <h1>Redirecting...</h1>
+      <h1>Redirecting...v7</h1>
       {!code && <p>No code provided. Please use the URL with a ?code= parameter.</p>}
     </div>
   );

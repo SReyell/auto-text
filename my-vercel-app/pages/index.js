@@ -34,7 +34,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Redirecting...</h1>
+      <h1>Redirecting...v2</h1>
       {!code && <p>No code provided. Please use the URL with a ?code= parameter.</p>}
     </div>
   );

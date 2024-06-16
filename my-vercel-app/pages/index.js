@@ -9,32 +9,29 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
+      // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Create a temporary iframe
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
+      // Create a hidden form element
+      const form = document.createElement('form');
+      form.action = smsLink;
+      form.method = 'get';
+      form.style.display = 'none';
 
-      // Create a temporary link element inside the iframe
-      const doc = iframe.contentWindow.document;
-      const link = doc.createElement('a');
-      link.href = smsLink;
+      // Append the form to the body
+      document.body.appendChild(form);
 
-      // Append the link to the iframe's body
-      doc.body.appendChild(link);
+      // Programmatically submit the form
+      form.submit();
 
-      // Simulate a user click
-      link.click();
-
-      // Remove the iframe from the document
-      document.body.removeChild(iframe);
+      // Remove the form from the document
+      document.body.removeChild(form);
     }
   }, [code]);
 
   return (
     <div>
-      <h1>Redirecting...v2</h1>
+      <h1>Redirecting...</h1>
       {!code && <p>No code provided. Please use the URL with a ?code= parameter.</p>}
     </div>
   );

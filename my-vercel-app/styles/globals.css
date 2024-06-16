@@ -1,8 +1,7 @@
 /* styles/globals.css */
 
-body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden; // Hide any potential scrollbars or content
-  }
-  
+html, body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden; // Prevent scrollbars
+}

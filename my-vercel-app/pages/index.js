@@ -9,10 +9,10 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      // Attempt to direct redirect without any delay or additional interaction
-      window.location.href = `sms:888222?body=${encodeURIComponent(code)}`;
+      const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
+      window.location.href = smsLink;
     }
   }, [code]);
 
-  return null; // Render nothing visually
+  return null;  // Ensure nothing is rendered
 }

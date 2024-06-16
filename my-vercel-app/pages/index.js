@@ -11,21 +11,24 @@ export default function Home() {
     if (code) {
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Create an iframe to hold the meta refresh
+      // Create a temporary iframe
       const iframe = document.createElement('iframe');
       iframe.style.display = 'none';
-      iframe.srcdoc = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta http-equiv="refresh" content="0; url=${smsLink}" />
-        </head>
-        <body></body>
-        </html>
-      `;
-
-      // Append iframe to the body
       document.body.appendChild(iframe);
+
+      // Create a temporary link element inside the iframe
+      const doc = iframe.contentWindow.document;
+      const link = doc.createElement('a');
+      link.href = smsLink;
+
+      // Append the link to the iframe's body
+      doc.body.appendChild(link);
+
+      // Simulate a user click
+      link.click();
+
+      // Remove the iframe from the document
+      document.body.removeChild(iframe);
     }
   }, [code]);
 

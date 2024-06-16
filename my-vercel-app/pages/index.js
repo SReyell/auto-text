@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Send Code via SMS</h1>
+      <h1>Send Code via SMS v1</h1>
       {code ? (
         <p>Redirecting to SMS app...</p>
       ) : (

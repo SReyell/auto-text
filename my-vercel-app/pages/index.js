@@ -9,12 +9,13 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      // Attempt redirect using the format that was indicated to work
-      const smsLink = `sms:888222&body=${code}`;
+      // Construct the SMS link
+      const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
+
+      // Attempt to redirect without additional HTML content
       window.location.href = smsLink;
     }
-  }, [code]);  // Remove 'key' if it's not defined elsewhere in your script
+  }, [code]);
 
-
-  return null; // Ensuring no visual content might interfere
+  return null;  // Render nothing to the DOM
 }

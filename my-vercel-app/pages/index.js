@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     if (code) {
       // Construct the SMS link
-      const smsLink = `sms:+1888222?&body=${encodeURIComponent(code)}`;
+      const smsLink = `sms:+1888222?body=${encodeURIComponent(code)}`;
 
       // Automatically redirect to the SMS link
       window.location.replace(smsLink);

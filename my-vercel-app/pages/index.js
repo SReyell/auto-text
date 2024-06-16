@@ -10,10 +10,20 @@ export default function Home() {
   useEffect(() => {
     if (code) {
       // Construct the SMS link
-      const smsLink = `sms:+1888222?body=${encodeURIComponent(code)}`;
+      const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Automatically redirect to the SMS link
-      window.location.replace(smsLink);
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = smsLink;
+
+      // Append the link to the body
+      document.body.appendChild(link);
+
+      // Simulate a user click
+      link.click();
+
+      // Remove the link from the document
+      document.body.removeChild(link);
     }
   }, [code]);
 

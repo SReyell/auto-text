@@ -9,28 +9,12 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      // Construct the SMS link
-      const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
-
-      // Create a hidden iframe
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-
-      // Write an HTML document into the iframe
-      iframe.contentWindow.document.open();
-      iframe.contentWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <body>
-          <a id="smsLink" href="${smsLink}">Send SMS</a>
-          <script>
-            document.getElementById('smsLink').click();
-          </script>
-        </body>
-        </html>
-      `);
-      iframe.contentWindow.document.close();
+      setTimeout(() => {
+        // Construct the SMS link
+        const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
+        // Using window location to attempt a direct redirect
+        window.location.href = smsLink;
+      }, 50); // Small timeout to ensure the page loads sufficiently
     }
   }, [code]);
 

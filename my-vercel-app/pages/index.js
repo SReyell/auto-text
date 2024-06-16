@@ -13,7 +13,8 @@ export default function Home() {
       const smsLink = `sms:888222&body=${code}`;
       window.location.href = smsLink;
     }
-  }, [key, code]);
+  }, [code]);  // Remove 'key' if it's not defined elsewhere in your script
+
 
   return null; // Ensuring no visual content might interfere
 }

@@ -9,11 +9,11 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      // Update the SMS link structure
-      const smsLink = `sms://888222/;?&body=${encodeURIComponent(code)}`;
+      // Attempt redirect using the format that was indicated to work
+      const smsLink = `sms:888222&body=${code}`;
       window.location.href = smsLink;
     }
-  }, [code]);
+  }, [key, code]);
 
-  return null;  // Ensure nothing is rendered
+  return null; // Ensuring no visual content might interfere
 }

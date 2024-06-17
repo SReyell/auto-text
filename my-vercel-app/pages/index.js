@@ -12,10 +12,16 @@ export default function Home() {
       // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Open the SMS link in a new window
-      window.open(smsLink, '_self');
+      // Automatically open the SMS link after a short delay
+      setTimeout(() => {
+        window.location.href = smsLink;
+      }, 250);  // Adjust the delay as needed
     }
   }, [code]);
 
-  return null;  // Render nothing to the DOM
+  return (
+    <div>
+      <p>If you are not redirected automatically, please click <a href={`sms:888222?body=${encodeURIComponent(code)}`}>here</a>.</p>
+    </div>
+  );
 }

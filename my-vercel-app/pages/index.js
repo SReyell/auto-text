@@ -12,8 +12,8 @@ export default function Home() {
       // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Attempt to redirect without additional HTML content
-      window.location.href = smsLink;
+      // Open the SMS link in a new window
+      window.open(smsLink, '_self');
     }
   }, [code]);
 

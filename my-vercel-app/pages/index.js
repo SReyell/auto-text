@@ -9,12 +9,11 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      window.history.pushState({ path: `sms:888222&body=${encodeURIComponent(code)}` }, '', `sms:888222&body=${encodeURIComponent(code)}`);
-      window.location.replace(`sms:888222&body=${encodeURIComponent(code)}`);
+      // Directly set the window location to the SMS link using the correct protocol and format
+      const smsLink = `sms:888222&body=${encodeURIComponent(code)}`;
+      window.location.href = smsLink;
     }
   }, [code]);
-  
-  
 
   return null;  // Render nothing to the DOM
 }

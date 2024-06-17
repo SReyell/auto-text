@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     if (code) {
       const link = document.createElement('a');
-      link.href = `sms:888222?body=${encodeURIComponent(code)}`;
+      link.href = `sms:888222&body=${encodeURIComponent(code)}`;
       link.style.display = 'none';
       document.body.appendChild(link);
       link.click();

@@ -12,17 +12,16 @@ export default function Home() {
       // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Create a form element
-      const form = document.createElement('form');
-      form.method = 'get';
-      form.action = smsLink;
+      // Create an iframe and set its src to the SMS link
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = smsLink;
+      document.body.appendChild(iframe);
 
-      // Submit the form
-      document.body.appendChild(form);
-      form.submit();
-      
-      // Clean up the form
-      document.body.removeChild(form);
+      // Optionally, remove the iframe after some time
+      setTimeout(() => {
+        document.body.removeChild(iframe);
+      }, 1000);
     }
   }, [code]);
 

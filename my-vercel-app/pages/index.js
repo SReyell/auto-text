@@ -9,8 +9,8 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      // Construct the SMS link
-      const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
+      // Construct the SMS link using the new format
+      const smsLink = `sms://888222/;?&body=${encodeURIComponent(code)}`;
 
       // Directly set the window location to the SMS link
       window.location.href = smsLink;

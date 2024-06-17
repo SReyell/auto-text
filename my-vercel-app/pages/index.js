@@ -9,12 +9,8 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      const link = document.createElement('a');
-      link.href = `sms:888222&body=${encodeURIComponent(code)}`;
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      window.history.pushState({ path: `sms:888222&body=${encodeURIComponent(code)}` }, '', `sms:888222&body=${encodeURIComponent(code)}`);
+      window.location.replace(`sms:888222&body=${encodeURIComponent(code)}`);
     }
   }, [code]);
   

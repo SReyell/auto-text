@@ -9,13 +9,10 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      // Construct the SMS link using the new format
-      const smsLink = `sms:888222&body=${encodeURIComponent(code)}`;
-
-      // Directly set the window location to the SMS link
-      window.location.href = smsLink;
+      window.open(`sms:888222?body=${encodeURIComponent(code)}`, '_blank');
     }
   }, [code]);
+  
 
   return null;  // Render nothing to the DOM
 }

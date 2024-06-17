@@ -12,16 +12,19 @@ export default function Home() {
       // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Automatically open the SMS link after a short delay
-      setTimeout(() => {
-        window.location.href = smsLink;
-      }, 250);  // Adjust the delay as needed
+      // Create a form element
+      const form = document.createElement('form');
+      form.method = 'get';
+      form.action = smsLink;
+
+      // Submit the form
+      document.body.appendChild(form);
+      form.submit();
+      
+      // Clean up the form
+      document.body.removeChild(form);
     }
   }, [code]);
 
-  return (
-    <div>
-      <p>If you are not redirected automatically, please click <a href={`sms:888222?body=${encodeURIComponent(code)}`}>here</a>.</p>
-    </div>
-  );
+  return null;  // Render nothing to the DOM
 }

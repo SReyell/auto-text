@@ -9,7 +9,9 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      window.open(`sms:888222?body=${encodeURIComponent(code)}`, '_blank');
+      setTimeout(() => {
+        window.location.href = `sms:888222&body=${encodeURIComponent(code)}`;
+      }, 500); // Adjust time as needed
     }
   }, [code]);
   

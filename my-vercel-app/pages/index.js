@@ -12,26 +12,26 @@ export default function Home() {
       // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Add a slight delay before triggering the SMS link
+      // Create an invisible anchor element
+      const anchor = document.createElement('a');
+      anchor.style.display = 'none';
+      anchor.href = smsLink;
+
+      // Append the anchor to the body
+      document.body.appendChild(anchor);
+
+      // Simulate a click event on the anchor
+      const event = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+      });
+      anchor.dispatchEvent(event);
+
+      // Remove the anchor after the event
       setTimeout(() => {
-        // Create a button element
-        const button = document.createElement('button');
-        button.style.display = 'none';
-        button.onclick = () => {
-          window.location.href = smsLink;
-        };
-
-        // Append the button to the body
-        document.body.appendChild(button);
-
-        // Simulate a click event on the button
-        button.click();
-
-        // Remove the button after clicking
-        setTimeout(() => {
-          document.body.removeChild(button);
-        }, 1000);
-      }, 1000); // Delay of 1 second
+        document.body.removeChild(anchor);
+      }, 1000);
     }
   }, [code]);
 

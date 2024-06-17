@@ -9,11 +9,15 @@ export default function Home() {
 
   useEffect(() => {
     if (code) {
-      setTimeout(() => {
-        window.location.href = `sms:888222&body=${encodeURIComponent(code)}`;
-      }, 500); // Adjust time as needed
+      const link = document.createElement('a');
+      link.href = `sms:888222?body=${encodeURIComponent(code)}`;
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   }, [code]);
+  
   
 
   return null;  // Render nothing to the DOM

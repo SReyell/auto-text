@@ -12,26 +12,30 @@ export default function Home() {
       // Construct the SMS link
       const smsLink = `sms:888222?body=${encodeURIComponent(code)}`;
 
-      // Create an invisible anchor element
-      const anchor = document.createElement('a');
-      anchor.style.display = 'none';
-      anchor.href = smsLink;
+      // Create a div to capture the tap event
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.top = 0;
+      overlay.style.left = 0;
+      overlay.style.width = '100%';
+      overlay.style.height = '100%';
+      overlay.style.zIndex = 9999;
+      overlay.style.backgroundColor = 'rgba(0,0,0,0.8)';
+      overlay.style.color = 'white';
+      overlay.style.display = 'flex';
+      overlay.style.justifyContent = 'center';
+      overlay.style.alignItems = 'center';
+      overlay.innerHTML = 'Tap anywhere to continue';
+      document.body.appendChild(overlay);
 
-      // Append the anchor to the body
-      document.body.appendChild(anchor);
+      // Add a click event listener to the overlay
+      overlay.addEventListener('click', () => {
+        // Remove the overlay
+        document.body.removeChild(overlay);
 
-      // Simulate a click event on the anchor
-      const event = new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true,
+        // Open the SMS link
+        window.location.href = smsLink;
       });
-      anchor.dispatchEvent(event);
-
-      // Remove the anchor after the event
-      setTimeout(() => {
-        document.body.removeChild(anchor);
-      }, 1000);
     }
   }, [code]);
 

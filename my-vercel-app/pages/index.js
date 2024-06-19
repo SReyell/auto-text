@@ -1,19 +1,11 @@
-// pages/index.js
+const express = require('express');
+const app = express();
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+app.get('/send-sms', (req, res) => {
+  const bodyText = encodeURIComponent('whatever'); // You can dynamically change 'whatever' based on your requirements.
+  res.redirect(302, `sms://888222/;?&body=${bodyText}`);
+});
 
-export default function Home() {
-  const router = useRouter();
-  const { code } = router.query;
-
-  useEffect(() => {
-    if (code) {
-      // Directly set the window location to the SMS link using the correct protocol and format
-      const smsLink = `sms:888222&body=${encodeURIComponent(code)}`;
-      window.location.href = smsLink;
-    }
-  }, [code]);
-
-  return null;  // Render nothing to the DOM
-}
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});
